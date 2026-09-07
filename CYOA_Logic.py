@@ -1,0 +1,98 @@
+from rich import print
+from rich.console import Console
+from ascii_magic import AsciiArt, from_image, Back
+from PIL import ImageEnhance
+import questionary, time, logging
+
+console = Console()
+logger = logging.getLogger(__name__)
+
+def seperateWithBorder(words_to_be_seperated): #a border that wraps around text when called
+  border = console.print(f"[sky_blue1]=====[/sky_blue1]\n {words_to_be_seperated} \n[sky_blue1]=====[/sky_blue1]")
+  return border
+
+def loadTitleScreen():
+  user_title_screen_choice = questionary.select("Our New (Every)day", choices=["New game", "Load", "End"]).ask()
+  if user_title_screen_choice == "New Game":
+    print("starting new game")
+
+  elif(user_title_screen_choice == "Load"): #check for save file. save should stay regardless if game closed
+    print("Loading game")
+    if(#the_hypthetical_save_file is True
+      ):
+      print("Loading save file")
+    else:
+      print("No previous save")
+
+  elif(user_title_screen_choice == "End"):
+    print("Closing...")
+    return
+
+  return user_title_screen_choice
+
+def saveGame():#this is all working. need to get actual save file to check
+  save_file = True
+
+  save_game = questionary.confirm("Would you like to save?").ask()
+  if save_game and save_file: #if they want to save, and save exists
+    overwrite_save = questionary.select("There is already a save in the slot. Would you still like to overwrite" \
+    " the save?", choices=["Overwrite", "Do not overwrite"]
+    ).ask() 
+    #final confirmation
+    if overwrite_save == "Overwrite":
+      final_overwrite_confirm = questionary.confirm("Overwrite save?").ask()
+      if final_overwrite_confirm :
+        console.print("[chartreuse1]Save overwritten. Success![/chartreuse1]")
+        return
+      else: 
+        console.print("returning debug case")
+        return
+    else:
+      return
+  elif save_game and not save_file:
+    console.print("[chartreuse1]Game saved successfuly![/chartreuse1]")
+  else:
+    console.print("Returning...")
+    return
+  
+  
+  # if userChoice.saveGame == "Yes":
+  #   #check for save file   
+  #   if saveFile is not None:
+  #     userChoice.overwriteSave.ask()
+  #   else:
+  #     print("No save found. Saving game...")
+  #     time.sleep(2)
+  # else:
+  #   return
+  
+  # if userChoice.overwriteSave == "Overwrite":
+  #   print("Overwriting save...")
+  #   time.sleep(2)
+  # else:
+    # print(userChoice)
+  
+  #save file in variable. if variable is taken, ask if wants to 
+  #be overwritten. if so, overwrite variable at pos x. Else return
+
+saveGame()
+
+
+# chapter = "1. The [yellow]Sun[/yellow]"
+# seperateWithBorder(chapter)
+
+
+# console.print("**Our New (Every)day**\n\n\nNew game \tLoad \tEnd")
+
+# loadTitleScreen()
+
+# try:
+#   displayed_art = from_image(f"dist/images/the_sun.jpg")
+#   displayed_art.to_terminal(columns=200)
+#   input("Press Enter to exit...")
+
+# except Exception as e:
+#   print(f"Unexpected error: {e}")
+#   input("Press Enter to exit...")
+
+# AsciiArt.print_palette()
