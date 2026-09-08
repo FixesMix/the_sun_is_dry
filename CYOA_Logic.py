@@ -2,7 +2,7 @@ from rich import print
 from rich.console import Console
 from ascii_magic import AsciiArt, from_image, Back
 from PIL import ImageEnhance
-import questionary, time, logging
+import questionary, time, logging, sys
 
 console = Console()
 logger = logging.getLogger(__name__)
@@ -17,18 +17,21 @@ def loadTitleScreen():
     print("starting new game")
 
   elif(user_title_screen_choice == "Load"): #check for save file. save should stay regardless if game closed
-    print("Loading game")
+    print("Loading game...")
+    time.sleep(2.5)
     if(#the_hypthetical_save_file is True
       ):
       print("Loading save file")
     else:
       print("No previous save")
+      
 
   elif(user_title_screen_choice == "End"):
     print("Closing...")
+    sys.exit()
     return
 
-  return user_title_screen_choice
+  
 
 def saveGame():#this is all working. need to get actual save file to check
   save_file = True
@@ -75,7 +78,7 @@ def saveGame():#this is all working. need to get actual save file to check
   #save file in variable. if variable is taken, ask if wants to 
   #be overwritten. if so, overwrite variable at pos x. Else return
 
-saveGame()
+loadTitleScreen()
 
 
 # chapter = "1. The [yellow]Sun[/yellow]"
