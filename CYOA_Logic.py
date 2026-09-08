@@ -13,8 +13,10 @@ def seperateWithBorder(words_to_be_seperated): #a border that wraps around text 
 
 def loadTitleScreen():
   user_title_screen_choice = questionary.select("Our New (Every)day", choices=["New game", "Load", "End"]).ask()
-  if user_title_screen_choice == "New Game":
-    print("starting new game")
+  if user_title_screen_choice == "New game":
+    print("starting new game...")
+    time.sleep(2.5)
+    gameLoop()
 
   elif(user_title_screen_choice == "Load"): #check for save file. save should stay regardless if game closed
     print("Loading game...")
@@ -30,8 +32,6 @@ def loadTitleScreen():
     print("Closing...")
     sys.exit()
     return
-
-  
 
 def saveGame():#this is all working. need to get actual save file to check
   save_file = True
@@ -58,7 +58,14 @@ def saveGame():#this is all working. need to get actual save file to check
     console.print("Returning...")
     return
   
-  
+  def gameLoop():
+    chapter = {} #a dictionary of chapters. chapter is chosen depending on point in time. each chapter contains
+    #chapter text. Chapter text is a dictionary of all given text within the chapter. Progress between text in a chaptext
+    #dictionary. branches depending on player choice. 
+
+
+
+
   # if userChoice.saveGame == "Yes":
   #   #check for save file   
   #   if saveFile is not None:
