@@ -2,10 +2,15 @@ from rich import print
 from rich.console import Console
 from ascii_magic import AsciiArt, from_image, Back
 from PIL import ImageEnhance
+from docx import Document
 import questionary, time, logging, sys
+
 
 console = Console()
 logger = logging.getLogger(__name__)
+document = Document("The_Sun.docx")
+lines = [p.text.strip() for p in document.paragraphs if p.text.strip()]
+
 
 def seperateWithBorder(words_to_be_seperated): #a border that wraps around text when called
   border = console.print(f"[sky_blue1]=====[/sky_blue1]\n {words_to_be_seperated} \n[sky_blue1]=====[/sky_blue1]")
