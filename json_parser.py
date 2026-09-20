@@ -1,36 +1,38 @@
 from docx import Document
 
-def get_lines_from_docx(path):
-  doc = Document(path)
-  lines = []
+def parse_story_docx(path):
+    doc = Document(path)
+    lines = [paragraph.text.strip() for paragraph in doc.paragraphs if paragraph.text.strip()]
 
-  for paragraph in doc.paragraphs:
-    text = paragraph.text.strip()
-    if text:
-      lines.append(text)
+    chapters = {}
+    current_chapter_id = None
+    current_node_id = None
 
-  return lines
+    for line in lines:
+        if line.startswith("CHAPTER:"):
+            current_chapter_id = line.replace("CHAPTER:", "").strip()
+            chapters[current_chapter_id] = {"nodes": {}}
 
+        elif line.startswith("NODE:"):
+            current_node_id = line.replace("NODE:", "").strip()
+            chapters[current_chapter_id]["nodes"][current_node_id] = {"dialogue": [], "choices": {}}
 
-def remove_empty(input):
-  word_list = []
+        elif line.startswith("CHOICE:"):
+            choice_part = line.replace("CHOICE:", "").strip()
+            label, target = choice_part.split("->")
+            chapters[current_chapter_id]["nodes"][current_node_id]["choices"][label.strip()] = target.strip()
 
-  for word in input:
-    pure_text = word.strip()
-    if pure_text:
-      word_list.append(pure_text)
-  return word_list
+        elif line.startswith("SETS_FLAG:"):
+            chapters[current_chapter_id]["nodes"][current_node_id]["sets_flag"] = line.replace("SETS_FLAG:", "").strip()
 
-line = "START: The Meadow"
+        elif line.startswith("NEXT_CHAPTER:"):
+            chapters[current_chapter_id]["nodes"][current_node_id]["next_chapter"] = line.replace("NEXT_CHAPTER:", "").strip()
+        
+        elif ":" in line:
+            speaker, spoken_line = line.split(":", 1)
+            chapters[current_chapter_id]["nodes"][current_node_id]["dialogue"].append({
+                "speaker": speaker.strip(),
+                "line": spoken_line.strip()
+            })
 
-if line.startswith("TITLE:"):
-  new_phrase = line.replace("TITLE:", "").strip()
-  print(new_phrase)
-elif line.startswith("START:"):
-  new_phrase = line.replace("START:", "").strip()
-  print(new_phrase)
-elif line.startswith("CHAPTER:"):
-  new_phrase = line.replace("CHAPTER:", "").strip()
-  print(new_phrase)
-else: 
-  print("Does not start with keyword.")
+    return chapters
