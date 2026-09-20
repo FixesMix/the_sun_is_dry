@@ -22,6 +22,9 @@ def parse_story_docx(path):
             label, target = choice_part.split("->")
             chapters[current_chapter_id]["nodes"][current_node_id]["choices"][label.strip()] = target.strip()
 
+        elif line.startswith("NEXT:"):
+          chapters[current_chapter_id]["nodes"][current_node_id]["next"] = line.replace("NEXT:", "").strip()
+
         elif line.startswith("SETS_FLAG:"):
             chapters[current_chapter_id]["nodes"][current_node_id]["sets_flag"] = line.replace("SETS_FLAG:", "").strip()
 

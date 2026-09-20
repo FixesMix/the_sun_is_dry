@@ -63,10 +63,8 @@ def saveGame():#this is all working. need to get actual save file to check
     console.print("Returning...")
     return
   
-  def gameLoop():
-    chapter = {} #a dictionary of chapters. chapter is chosen depending on point in time. each chapter contains
-    #chapter text. Chapter text is a dictionary of all given text within the chapter. Progress between text in a chaptext
-    #dictionary. branches depending on player choice. 
+def gameLoop():
+  chapter = {} 
 
 
 
