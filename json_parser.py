@@ -1,9 +1,6 @@
 from docx import Document
 
-def parse_story(path):
-    doc = Document(path)
-    lines = [paragraph.text.strip() for paragraph in doc.paragraphs if paragraph.text.strip()]
-
+def parse_story(lines):
     chapters = {}
     current_chapter_id = None
     current_node_id = None
@@ -12,6 +9,12 @@ def parse_story(path):
         if line.startswith("CHAPTER:"): #Signals the start of a chapter
             current_chapter_id = line.replace("CHAPTER:", "").strip()
             chapters[current_chapter_id] = {"nodes": {}} 
+
+        elif line.startswith("TITLE:"):
+            chapters[current_chapter_id]["title"] = line.replace("TITLE:", "").strip()
+
+        elif line.startswith("START:"):
+            chapters[current_chapter_id]["start_node"] = line.replace("START:", "").strip()
 
         elif line.startswith("NODE:"): #Position change
             current_node_id = line.replace("NODE:", "").strip()
@@ -39,3 +42,4 @@ def parse_story(path):
             })
 
     return chapters
+

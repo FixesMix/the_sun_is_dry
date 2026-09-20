@@ -9,8 +9,11 @@ import questionary, time, logging, sys
 
 console = Console()
 logger = logging.getLogger(__name__)
+
+
 document = Document("The_Sun.docx")
-lines = [p.text.strip() for p in document.paragraphs if p.text.strip()]
+
+lines = [p.text.replace("\xa0", " ").strip() for p in document.paragraphs if p.text.strip()]
 
 
 def seperateWithBorder(words_to_be_seperated): #a border that wraps around text when called
@@ -69,7 +72,9 @@ def gameLoop():
     story = parse_story(lines) 
     current_chapter_id = "1"         
 
-    chapter = story[current_chapter_id]                
+    chapter = story[current_chapter_id]
+    print(f"DEBUG: chapter 1's start_node = {chapter['start_node']}")
+    print(f"DEBUG: chapter 1's node list = {list(chapter['nodes'].keys())}")
     current_node_id = chapter["start_node"]
 
     while True:
@@ -118,8 +123,12 @@ def gameLoop():
   
   #save file in variable. if variable is taken, ask if wants to 
   #be overwritten. if so, overwrite variable at pos x. Else return.
+
+
 loadTitleScreen()
 
+result = parse_story(lines)
+print(result)
 
 # chapter = "1. The [yellow]Sun[/yellow]"
 # seperateWithBorder(chapter)
