@@ -3,6 +3,7 @@ from rich.console import Console
 from ascii_magic import AsciiArt, from_image, Back
 from PIL import ImageEnhance
 from docx import Document
+from json_parser import parse_story
 import questionary, time, logging, sys
 
 
@@ -63,10 +64,40 @@ def saveGame():#this is all working. need to get actual save file to check
     console.print("Returning...")
     return
   
+
 def gameLoop():
-  chapter = {} 
+    story = parse_story(lines) 
+    current_chapter_id = "1"         
 
+    chapter = story[current_chapter_id]                
+    current_node_id = chapter["start_node"]
 
+    while True:
+        node = chapter["nodes"][current_node_id]   
+
+        for entry in node["dialogue"]:
+            if entry["speaker"] == "NARRATOR":
+                console.print(entry["line"])
+            else:
+                console.print(f"[bold]{entry['speaker']}:[/bold] {entry['line']}")
+            input("(>)")
+
+        if "next" in node:
+            current_node_id = node["next"]
+
+        elif "next_chapter" in node:
+                current_chapter_id = node["next_chapter"]
+                break
+
+        elif node["choices"]:
+            choice = questionary.select("",
+                choices=list(node["choices"].keys())
+            ).ask()
+            current_node_id = node["choices"][choice]
+
+        else: #True ending. Logic to be added
+            console.print("[sky_blue1]--- END ---[/sky_blue1]")
+            return
 
 
   # if userChoice.saveGame == "Yes":
