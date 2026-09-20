@@ -20,3 +20,17 @@ def remove_empty(input):
     if pure_text:
       word_list.append(pure_text)
   return word_list
+
+line = "START: The Meadow"
+
+if line.startswith("TITLE:"):
+  new_phrase = line.replace("TITLE:", "").strip()
+  print(new_phrase)
+elif line.startswith("START:"):
+  new_phrase = line.replace("START:", "").strip()
+  print(new_phrase)
+elif line.startswith("CHAPTER:"):
+  new_phrase = line.replace("CHAPTER:", "").strip()
+  print(new_phrase)
+else: 
+  print("Does not start with keyword.")
