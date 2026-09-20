@@ -26,7 +26,7 @@ def loadTitleScreen():
   elif(user_title_screen_choice == "Load"): #check for save file. save should stay regardless if game closed
     print("Loading game...")
     time.sleep(2.5)
-    if(#the_hypthetical_save_file is True
+    if(#the_hypothetical_save_file is True
       ):
       print("Loading save file")
     else:
