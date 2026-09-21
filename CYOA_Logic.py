@@ -15,8 +15,9 @@ document = Document("The_Sun.docx")
 lines = [p.text.replace("\xa0", " ").strip() for p in document.paragraphs if p.text.strip()]
 
 
-def seperateWithBorder(words_to_be_seperated): #a border that wraps around text when called
-  border = console.print(f"[sky_blue1]=====[/sky_blue1]\n {words_to_be_seperated} \n[sky_blue1]=====[/sky_blue1]")
+def seperateWithBorder(): #a border that wraps around text when called
+  border = console.print(f"[sky_blue1]==========[/sky_blue1]")
+  time.sleep(1)
   return border
 
 def loadTitleScreen():
@@ -79,9 +80,11 @@ def gameLoop():
     chapter = story[current_chapter_id]
     current_node_id = chapter["start_node"]
     
-    print(current_chapter_id)
     
-
+    seperateWithBorder()
+    console.print(f"Chapter {current_chapter_id} - {chapter["title"]}")  
+    seperateWithBorder()
+    
     while True:
       node = chapter["nodes"][current_node_id]
 
@@ -93,7 +96,9 @@ def gameLoop():
         input("(>)")
 
       if "next" in node:
+        seperateWithBorder()
         current_node_id = node["next"]
+        
 
       elif "next_chapter" in node:
         current_chapter_id = node["next_chapter"]
@@ -103,6 +108,7 @@ def gameLoop():
         choice = questionary.select("",
             choices=list(node["choices"].keys())
         ).ask()
+        seperateWithBorder()
         current_node_id = node["choices"][choice]
 
       else:
