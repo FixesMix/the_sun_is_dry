@@ -12,7 +12,6 @@ logger = logging.getLogger(__name__)
 
 
 document = Document("The_Sun.docx")
-
 lines = [p.text.replace("\xa0", " ").strip() for p in document.paragraphs if p.text.strip()]
 
 
@@ -21,26 +20,30 @@ def seperateWithBorder(words_to_be_seperated): #a border that wraps around text 
   return border
 
 def loadTitleScreen():
-  user_title_screen_choice = questionary.select("Our New (Every)day", choices=["New game", "Load", "End"]).ask()
-  if user_title_screen_choice == "New game":
-    print("starting new game...")
-    time.sleep(2.5)
-    gameLoop()
+  print("Our New (Every)day")
+  while True:
+    user_title_screen_choice = questionary.select("", choices=["New game", "Load", "End"]).ask()
 
-  elif(user_title_screen_choice == "Load"): #check for save file. save should stay regardless if game closed
-    print("Loading game...")
-    time.sleep(2.5)
-    if(#the_hypothetical_save_file is True
-      ):
-      print("Loading save file")
-    else:
-      print("No previous save")
+    if user_title_screen_choice == "New game":
+      print("starting new game...")
+      time.sleep(2.5)
+      gameLoop()
+
+    elif(user_title_screen_choice == "Load"): #check for save file. save should stay regardless if game closed
+      print("Loading game...")
+      time.sleep(2.5)
+      if(#the_hypothetical_save_file is True
+        ):
+        print("Loading save file")
+      else:
+        print("No previous save")
       
 
-  elif(user_title_screen_choice == "End"):
-    print("Closing...")
-    sys.exit()
-    return
+    elif(user_title_screen_choice == "End"):
+      print("Closing...")
+      sys.exit()
+      return
+  
 
 def saveGame():#this is all working. need to get actual save file to check
   save_file = True
@@ -69,41 +72,42 @@ def saveGame():#this is all working. need to get actual save file to check
   
 
 def gameLoop():
-    story = parse_story(lines) 
-    current_chapter_id = "1"         
+  story = parse_story(lines) 
+  current_chapter_id = "1"         
 
+  while True:
     chapter = story[current_chapter_id]
-    print(f"DEBUG: chapter 1's start_node = {chapter['start_node']}")
-    print(f"DEBUG: chapter 1's node list = {list(chapter['nodes'].keys())}")
     current_node_id = chapter["start_node"]
+    
+    print(current_chapter_id)
+    
 
     while True:
-        node = chapter["nodes"][current_node_id]   
+      node = chapter["nodes"][current_node_id]
 
-        for entry in node["dialogue"]:
-            if entry["speaker"] == "NARRATOR":
-                console.print(entry["line"])
-            else:
-                console.print(f"[bold]{entry['speaker']}:[/bold] {entry['line']}")
-            input("(>)")
+      for entry in node["dialogue"]:
+        if entry["speaker"] == "NARRATOR":
+          console.print(entry["line"])
+        else:
+          console.print(f"[bold]{entry['speaker']}:[/bold] {entry['line']}")
+        input("(>)")
 
-        if "next" in node:
-            current_node_id = node["next"]
+      if "next" in node:
+        current_node_id = node["next"]
 
-        elif "next_chapter" in node:
-                current_chapter_id = node["next_chapter"]
-                break
+      elif "next_chapter" in node:
+        current_chapter_id = node["next_chapter"]
+        break
 
-        elif node["choices"]:
-            choice = questionary.select("",
-                choices=list(node["choices"].keys())
-            ).ask()
-            current_node_id = node["choices"][choice]
+      elif node["choices"]:
+        choice = questionary.select("",
+            choices=list(node["choices"].keys())
+        ).ask()
+        current_node_id = node["choices"][choice]
 
-        else: #True ending. Logic to be added
-            console.print("[sky_blue1]--- END ---[/sky_blue1]")
-            return
-
+      else:
+        console.print("[sky_blue1]--- END ---[/sky_blue1]")
+        return
 
   # if userChoice.saveGame == "Yes":
   #   #check for save file   
