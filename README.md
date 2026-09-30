@@ -93,6 +93,11 @@ to `rich.text.Text` for rendering.
 This gives 24-bit color output in the terminal using
 the exact same character mapping `ascii_magic` produces, with none of the color loss.
 
+![Terminal gameplay showing colored ASCII rendering](EXAMPLE%20the_sun_is_dry_SSTerminal.png)
+
+![Terminal gameplay showing colored ASCII rendering](EXAMPLE%20the_sun_is_dry_SSTerminal_2.png)
+
+
 Image sizing is computed by the renderer, which reads the
 current size of the terminal (`shutil.get_terminal_size()`) and the source image's aspect
 ratio. This means tall images never scroll out of view. 
