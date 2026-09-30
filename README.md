@@ -9,6 +9,8 @@ in the terminal with 24-bit color images, save/load, and branching.
 *The Sun is Dry* is a story about the world
 existing once the sun has left, as well as a small demonstration of the engine's features. 
 
+![Terminal gameplay showing colored ASCII rendering](EXAMPLE%20the_sun_is_dry_GIFTerm.gif)
+
 ## Table of Contents
 
 - [Features](#features)
