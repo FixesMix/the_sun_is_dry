@@ -34,6 +34,13 @@ def parse_story(lines):
         elif line.startswith("NEXT_CHAPTER:"): #Signals the end of a chapter
             chapters[current_chapter_id]["nodes"][current_node_id]["next_chapter"] = line.replace("NEXT_CHAPTER:", "").strip()
         
+        elif line.startswith("IMAGE:"): #An image to be displayed
+            image_path = line.replace("IMAGE:", "").strip()
+            chapters[current_chapter_id]["nodes"][current_node_id]["dialogue"].append({
+                "type": "image",
+                "path": image_path
+            })
+            
         elif ":" in line: #A speaking character
             speaker, spoken_line = line.split(":", 1)
             chapters[current_chapter_id]["nodes"][current_node_id]["dialogue"].append({
