@@ -9,7 +9,7 @@ in the terminal with 24-bit color images, save/load, and branching.
 *The Sun is Dry* is a story about the world
 existing once the sun has left, as well as a small demonstration of the engine's features. 
 
-![Terminal gameplay showing colored ASCII rendering](EXAMPLE%20the_sun_is_dry_GIFTerm.gif)
+![Terminal gameplay showing colored ASCII rendering](EXAMPLES/EXAMPLE%20the_sun_is_dry_GIFTerm.gif)
 
 ## Table of Contents
 
@@ -95,9 +95,9 @@ to `rich.text.Text` for rendering.
 This gives 24-bit color output in the terminal using
 the exact same character mapping `ascii_magic` produces, with none of the color loss.
 
-![Terminal gameplay showing colored ASCII rendering](EXAMPLE%20the_sun_is_dry_SSTerminal.png)
+![Terminal gameplay showing colored ASCII rendering](EXAMPLES/EXAMPLE%20the_sun_is_dry_SSTerminal.png)
 
-![Terminal gameplay showing colored ASCII rendering](EXAMPLE%20the_sun_is_dry_SSTerminal_2.png)
+![Terminal gameplay showing colored ASCII rendering](EXAMPLES/EXAMPLE%20the_sun_is_dry_SSTerminal_2.png)
 
 
 Image sizing is computed by the renderer, which reads the
