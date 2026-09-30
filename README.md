@@ -37,7 +37,7 @@ pip install -r requirements.txt
 python CYOA_Logic.py
 ```
 
-Story content lives in `The_Sun.docx` — images referenced by `IMAGE:` lines are not
+Story content lives in `The_Sun.docx`. Images referenced by `IMAGE:` lines are not
 included in this repo (see [Assets](#assets) below), so the game will run and display all
 text/choices correctly, but will show a placeholder message where images would normally
 appear.
