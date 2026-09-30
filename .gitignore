@@ -1,4 +1,10 @@
 Understanding.py
 dist/images/
+dist/dist/images/
 The_sun.jpg
 save.json
+
+dist/
+build/
+__pycache__/
+*.pyc
