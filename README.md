@@ -113,4 +113,4 @@ normally.
 ## Status
 
 This is a work in progress, built for learning Python and
-terminal rendering. The story ends after a few passes. Additional chapters and assets are staged for the future
+terminal rendering. The story ends after chapter 1. Additional chapters and assets are staged for the future
