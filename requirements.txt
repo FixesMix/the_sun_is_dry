@@ -1,0 +1,4 @@
+python-docx
+rich
+ascii_magic
+questionary
