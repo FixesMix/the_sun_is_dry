@@ -14,6 +14,7 @@ existing once the sun has left, as well as a small demonstration of the engine's
 ## Table of Contents
 
 - [Features](#features)
+- [Terminal Compatibility](#terminal-compatibility)
 - [To Run](#to-run)
 - [Story Format](#story-format)
 - [Technical Highlights](#technical-highlights)
@@ -31,6 +32,15 @@ existing once the sun has left, as well as a small demonstration of the engine's
 - **Full 24-bit color terminal images** — images render as true-RGB ASCII art. The art is sized
   to fit the player's terminal window. See [Technical Highlights](#technical-highlights)
   for how this actually works.
+
+## Terminal Compatibility
+
+This project uses `rich` for colored terminal output, which requires proper ANSI/VT escape
+sequence support. **Windows Terminal is recommended**, as the legacy Command Prompt
+(`conhost.exe`) on Windows 10 has weaker ANSI support and can cause visual glitches
+. Windows 11's default terminal and most Linux/macOS terminals work fine without changes.
+
+To install Windows Terminal: search "Windows Terminal" in the Microsoft Store.
 
 ## To Run
 
