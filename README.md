@@ -46,6 +46,7 @@ To install Windows Terminal: search "Windows Terminal" in the Microsoft Store.
 
 ```
 pip install -r requirements.txt
+drag The_Sun.docx into dist
 python CYOA_Logic.py
 ```
 
